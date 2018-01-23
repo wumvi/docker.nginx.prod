@@ -21,9 +21,9 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     mkdir -p /soft/ && \
     #
     cd /soft/ && \
-    wget https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz && \
-    tar -zxf openssl-$OPENSSL_VERSION.tar.gz && \
-    cd openssl-$OPENSSL_VERSION && \
+    wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz && \
+    tar -zxf openssl-${OPENSSL_VERSION}.tar.gz && \
+    cd openssl-${OPENSSL_VERSION} && \
     ./config --prefix=/usr && \
     make && \
     make install && \
@@ -50,9 +50,9 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     cd /soft/ && \
     git clone https://github.com/yandex/sdch_module.git sdch_module && \
     git clone https://github.com/vozlt/nginx-module-vts.git nginx-module-vts && \
-    wget https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && \
-    tar -zxf nginx-$NGINX_VERSION.tar.gz && \
-    cd nginx-$NGINX_VERSION && \
+    wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
+    tar -zxf nginx-${NGINX_VERSION}.tar.gz && \
+    cd nginx-${NGINX_VERSION} && \
     export NGX_BROTLI_STATIC_MODULE_ONLY=1 && \
     ./configure \
         --sbin-path=/usr/sbin/nginx \
@@ -60,19 +60,25 @@ RUN DEBIAN_FRONTEND=noninteractive && \
         --pid-path=/var/run/nginx.pid \
         --error-log-path=/dev/stdout \
         --http-log-path=/dev/stdout  \
-        --with-openssl=/soft/openssl-$OPENSSL_VERSION/ \
+        --with-openssl=/soft/openssl-${OPENSSL_VERSION}/ \
         --with-http_ssl_module \
         --with-http_gzip_static_module \
         --with-http_addition_module \
         --with-http_realip_module \
         --with-http_v2_module \
+        --with-threads \
+        --with-http_slice_module \
+        --with-file-aio \
+        --with-http_v2_module \
+        --with-stream \
+        --with-stream_ssl_module \
         --add-module=../sdch_module/ \
         --add-module=../ngx_brotli/ \
         --add-module=../nginx-module-vts/ && \
     make && \
     make install && \
     #
-    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH && \
+    export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH} && \
     #
     apt-get -y remove libboost-all-dev git cmake ssh build-essential zlib1g-dev && \
     apt-get -y autoremove && \
@@ -82,5 +88,5 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     chmod +x /*.sh && \
     echo 'end'
 
-CMD ["nginx -g 'daemon off;'"]
+CMD ["nginx", "-g", "daemon off;"]
 HEALTHCHECK --interval=2m --timeout=3s CMD curl -f http://localhost/ || exit 1
