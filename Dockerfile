@@ -81,3 +81,6 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     #
     chmod +x /*.sh && \
     echo 'end'
+
+CMD ["nginx -g 'daemon off;'"]
+HEALTHCHECK --interval=2m --timeout=3s CMD curl -f http://localhost/ || exit 1
