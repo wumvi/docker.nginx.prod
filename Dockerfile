@@ -7,10 +7,10 @@ ADD /conf/ /etc/nginx/
 WORKDIR /www/
 ADD /cmd/  /
 
-LABEL version="1.0" nginx="1.9.9" openssl="1.1.0g"  mode="prod"
+LABEL version="1.1" nginx="1.9.15" openssl="1.0.2n"  mode="prod"
 
-ENV NGINX_VERSION 1.34.8
-ENV OPENSSL_VERSION 1.1.0g
+ENV NGINX_VERSION 1.9.15
+ENV OPENSSL_VERSION 1.0.2n
 ENV RUN_MODE PROD
 
 RUN DEBIAN_FRONTEND=noninteractive && \
@@ -71,6 +71,8 @@ RUN DEBIAN_FRONTEND=noninteractive && \
         --add-module=../nginx-module-vts/ && \
     make && \
     make install && \
+    #
+    export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH && \
     #
     apt-get -y remove libboost-all-dev git cmake ssh build-essential zlib1g-dev && \
     apt-get -y autoremove && \
