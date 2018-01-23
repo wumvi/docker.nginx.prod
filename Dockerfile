@@ -7,7 +7,7 @@ ADD /conf/ /etc/nginx/
 WORKDIR /www/
 ADD /cmd/  /
 
-LABEL version="1.0" nginx="1.13.8" openssl="1.1.0g"  mode="prod"
+LABEL version="1.0" nginx="1.9.9" openssl="1.1.0g"  mode="prod"
 
 ENV NGINX_VERSION 1.34.8
 ENV OPENSSL_VERSION 1.1.0g
