@@ -9,7 +9,7 @@ ADD /cmd/  /
 
 LABEL version="1.0" nginx="1.9.9" openssl="1.1.0g"  mode="prod"
 
-ENV NGINX_VERSION 1.34.8
+ENV NGINX_VERSION 1.9.9
 ENV OPENSSL_VERSION 1.1.0g
 ENV RUN_MODE PROD
 
