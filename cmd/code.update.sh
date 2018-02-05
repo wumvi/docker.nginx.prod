@@ -50,6 +50,7 @@ fi
 TPL_NAME=$PROJECT_FOLDER/prod/nginx.conf
 if [ ! -r $TPL_NAME ]
 then
+	rm -rf $PROJECT_FOLDER
 	echo Error: template $TPL_NAME not found
 	exit 5
 fi
@@ -69,6 +70,7 @@ if [ ! $? -eq 0 ]
 then
 	rm $CONFIG_NAME
 	[ -r $BACKUP_CONFIG_NAME ] && mv $BACKUP_CONFIG_NAME $CONFIG_NAME
+	rm -rf $PROJECT_FOLDER
 	echo Bad template $TPL_NAME
 	exit 6
 fi
@@ -78,6 +80,7 @@ if [ ! $? -eq 0 ]
 then
 	rm $CONFIG_NAME
 	[ -r $BACKUP_CONFIG_NAME ] && mv $BACKUP_CONFIG_NAME $CONFIG_NAME
+	rm -rf $PROJECT_FOLDER
 	echo Error during restarting nginx
 	exit 7
 fi
