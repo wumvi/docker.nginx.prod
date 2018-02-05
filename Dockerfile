@@ -15,7 +15,7 @@ ENV RUN_MODE PROD
 
 RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
-    apt-get --no-install-recommends -qq -y install wget apt-transport-https lsb-release ca-certificates zlib1g-dev cmake build-essential vim libboost-all-dev git zip && \
+    apt-get --no-install-recommends -qq -y install wget apt-transport-https lsb-release ca-certificates zlib1g-dev unzip cmake build-essential vim libboost-all-dev git gettext-base && \
     mkdir -p /www/ && \
     mkdir -p /www/conf/ && \
     mkdir -p /soft/ && \
