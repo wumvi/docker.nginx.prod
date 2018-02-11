@@ -71,6 +71,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
         --with-file-aio \
         --with-http_v2_module \
         --with-stream \
+        --with-ipv6 \
         --with-stream_ssl_module \
         --add-module=../sdch_module/ \
         --add-module=../ngx_brotli/ \
