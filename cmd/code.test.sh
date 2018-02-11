@@ -1,3 +1,3 @@
 #!/bin/bash
 nginx -t
-exit $@
+exit $?
