@@ -69,6 +69,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
         --with-threads \
         --with-http_slice_module \
         --with-file-aio \
+        ----with-ipv6 \
         --with-http_v2_module \
         --with-stream \
         --with-stream_ssl_module \
