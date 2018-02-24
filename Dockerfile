@@ -80,6 +80,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     make install && \
     #
     export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH} && \
+    echo '127.0.0.1 nginx.health' >> /etc/hosts && \
     #
     apt-get -y remove libboost-all-dev git cmake ssh build-essential zlib1g-dev && \
     apt-get -y autoremove && \
@@ -90,4 +91,4 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     echo 'end'
 
 CMD ["nginx", "-g", "daemon off;"]
-HEALTHCHECK --interval=2m --timeout=3s CMD curl -f http://nginx.health/ping || exit 1
+HEALTHCHECK --interval=1m --timeout=3s CMD STATUS=`curl -s -o /dev/null -w '%{http_code}' http://nginx.health:8383/ping` && [ $STATUS = 200 ]
