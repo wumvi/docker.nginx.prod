@@ -90,4 +90,4 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     echo 'end'
 
 CMD ["nginx", "-g", "daemon off;"]
-HEALTHCHECK --interval=2m --timeout=3s CMD curl -f http://localhost/ || exit 1
+HEALTHCHECK --interval=2m --timeout=3s CMD curl -f http://nginx.health/ping || exit 1
