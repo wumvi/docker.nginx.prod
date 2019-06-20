@@ -1,3 +1,3 @@
 #!/bin/bash
-nginx -s reload
+nginx -t && nginx -s reload
 exit $?
