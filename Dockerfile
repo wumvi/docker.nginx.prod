@@ -90,6 +90,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /soft/
 
-COPY docker-prod/common/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY conf/*.conf /etc/nginx/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]
